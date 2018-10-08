@@ -10,31 +10,40 @@ import { RestProvider } from '../../providers/rest/rest';
   templateUrl: 'list.html'
 })
 export class ListPage {
-  items: Array<{title: string, year: number, icon: string, image: string}>;
-  films: any;
+  items: Array<{}>;
+  films: string[];
+  nbResult: number;
+  error: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider) {
 
-    this.getFilms();
-
+    this.nbResult = 0;
+    this.error = false;
+    this.films = [];
     this.items = [];
-    
-    for (let i = 1; i <= 10; i++) {
-      this.items.push({
-        title: films[i].title,
-        year: films[i].year,
-        image: films[i].poster,
-        icon: 'film'
-      });
-    }
+
   }
 
-  getFilms() {
-    this.restProvider.getFilms()
-    .then(data => {
-      this.films = data['search'];
-      console.log(this.films);
-    });
+  getFilms(ev: any) {
+    let val = ev.target.value;
+    if (val && val.trim() !== '') {
+      this.restProvider.getFilms(val)
+      .then(data => {
+        if ( data['Response'] ) {
+          this.films = data['Search'];
+          this.nbResult = data['totalResults'];
+          this.setItems();
+          console.log(this.films);
+        } else this.error = true;
+      });
+    } else return;
+  }
+
+  setItems() {
+    for(let i = 1; i <= this.nbResult; i++) {
+      this.items[i] = this.films[i];
+      console.log(this.films[i]);
+    }
   }
 
   itemTapped(event, film) {

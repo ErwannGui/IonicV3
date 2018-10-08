@@ -5,13 +5,19 @@
     </button>
     <ion-title>My First List</ion-title>
   </ion-navbar>
+  <ion-searchbar
+    placeholder="Search for movies"
+    (ionInput)="getFilms($event)"
+    (ionCancel)="onCancel($event)">
+  </ion-searchbar>
 </ion-header>
 
 <ion-content>
+  <span float-right>{{nbResult}}</span>
   <ion-list>
     <button ion-item *ngFor="let film of films" (click)="itemTapped($event, film)">
-      <ion-icon name="{{film.icon}}" item-right></ion-icon>
-      {{film.title}}
+      <ion-icon name="film" item-left></ion-icon>
+      {{film.Title}}
     </button>
   </ion-list>
 </ion-content>

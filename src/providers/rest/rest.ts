@@ -12,13 +12,14 @@ export class RestProvider {
 
 	apiUrl = 'http://www.omdbapi.com/';
 	apiKey = 'd55be316';
-	search = 'avenger';
+	search = '';
 
   constructor(public http: HttpClient) {
     console.log('Hello RestProvider Provider');
   }
 
-  getFilms() {
+  getFilms(val) {
+    this.search = val;
     return new Promise(resolve => {
 	    this.http.get(this.apiUrl+'?apikey='+this.apiKey+'&s='+this.search).subscribe(data => {
 	      resolve(data);
