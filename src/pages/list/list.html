@@ -7,17 +7,16 @@
   </ion-navbar>
   <ion-searchbar
     placeholder="Search for movies"
-    (ionInput)="getFilms($event)"
-    (ionCancel)="onCancel($event)">
+    (ionInput)="getFilms($event)">
   </ion-searchbar>
 </ion-header>
 
 <ion-content>
-  <span float-right>{{nbResult}}</span>
-  <ion-list>
-    <button ion-item *ngFor="let film of films" (click)="itemTapped($event, film)">
-      <ion-icon name="film" item-left></ion-icon>
-      {{film.Title}}
-    </button>
-  </ion-list>
+  <ion-slides style="background-color: black">
+    <ion-slide *ngFor="let film of films" (click)="itemTapped($event, film)">
+      <img style="width: 100%; height: 500px;" src="{{film.Poster}}"/>
+      <h1 text-center style="color: white">{{film.Title}}</h1>
+      <span text-center style="color: white">{{film.Year}}</span>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

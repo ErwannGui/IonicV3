@@ -33,7 +33,7 @@ export class ListPage {
           this.films = data['Search'];
           this.nbResult = data['totalResults'];
           this.setItems();
-          console.log(this.films);
+          //console.log(this.films);
         } else this.error = true;
       });
     } else return;
@@ -42,7 +42,7 @@ export class ListPage {
   setItems() {
     for(let i = 1; i <= this.nbResult; i++) {
       this.items[i] = this.films[i];
-      console.log(this.films[i]);
+      //console.log(this.films[i]);
     }
   }
 

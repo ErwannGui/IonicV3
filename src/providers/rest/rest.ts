@@ -20,10 +20,10 @@ export class RestProvider {
 
   getFilms(val) {
     this.search = val;
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
 	    this.http.get(this.apiUrl+'?apikey='+this.apiKey+'&s='+this.search).subscribe(data => {
 	      resolve(data);
-	      console.log(data);
+	      //console.log(data);
 	    }, err => {
 	      console.log(err);
 	    });
